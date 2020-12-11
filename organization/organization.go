@@ -40,7 +40,7 @@ func DeleteOrganization(c *fiber.Ctx) {
 	db := database.DBConn
 	var organization Organization
 	db.First(&organization, id)
-	if organization.Nane == "" {
+	if organization.Name == "" {
 		c.Status(500).Send("No organization found with ID")
 		return
 	}

@@ -18,13 +18,15 @@ func initDatabase() {
 	}
 	fmt.Println("Successfully connected to the DB")
 	database.DBConn.AutoMigrate(&organization.Organization{})
+	fmt.Println("Database Migrated")
 }
 
 func main() {
 
 	app := fiber.New()
 	initDatabase()
-	setupRoutes(app)
+	defer database.DBConn.Close()
+	setupRoutes(app) 
 	app.Listen(":3000")
 }
 func setupRoutes(app *fiber.App) {
