@@ -1,12 +1,29 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/gofiber/fiber"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"github.com/mazhaboy/test/tree/master/database"
 	"github.com/mazhaboy/test/tree/master/organization"
 )
 
+func initDatabase() {
+	var err error
+	database.DBConn, err = gorm.Open("sqlite3", "organizations.db")
+	if err != nil {
+		panic("Failed to connect database")
+	}
+	fmt.Println("Successfully connected to the DB")
+	database.DBConn.AutoMigrate(&organization.Organization{})
+}
+
 func main() {
+
 	app := fiber.New()
+	initDatabase()
 	setupRoutes(app)
 	app.Listen(":3000")
 }
