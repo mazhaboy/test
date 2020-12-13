@@ -8,16 +8,15 @@
     <script async src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 <body class="container">
+    <a href="/organizations">
+        <h2>Back</h2> 
+    </a>  
+    <h1>{{.Title.Name}}</h1>
+
     
-    {{ range .Title}}
-    <a href="/organizations/{{.ID}}">
-        <h2>{{.Name}}</h2>
-       
-    </a>    
+    <p>{{.Title.Address}}</p>
+    <p>{{.Title.Phone}}</p>
     
-    <p>{{.Address}}</p>
-    <p>{{.Phone}}</p>
     
-    {{end}}
 </body>
 </html>
